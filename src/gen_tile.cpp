@@ -266,6 +266,7 @@ static enum protoCmd render(struct xmlmapconfig * map, int x, int y, int z, char
 
     // Split the meta tile into an NxN grid of tiles
     unsigned int xx, yy;
+    std::string format = map->map.get_extra_parameters().get<std::string>("format", "png256").get();
     for (yy = 0; yy < render_size_ty; yy++) {
         for (xx = 0; xx < render_size_tx; xx++) {
 #if MAPNIK_VERSION >= 300000
@@ -274,7 +275,7 @@ static enum protoCmd render(struct xmlmapconfig * map, int x, int y, int z, char
 #else
             mapnik::image_view<mapnik::image_data_32> vw(xx * map->tilesize, yy * map->tilesize, map->tilesize, map->tilesize, buf.data());
 #endif
-            tiles.set(xx, yy, save_to_string(vw, "png256"));
+            tiles.set(xx, yy, save_to_string(vw, format));
         }
     }
     return cmdDone; // OK
@@ -311,7 +312,8 @@ static enum protoCmd render(Map &m, const char *tile_dir, char *xmlname, project
 
     mapnik::image_view<mapnik::image_data_32> vw(128, 128, 256, 256, buf.data());
     //std::cout << "Render " << z << " " << x << " " << y << " " << filename << "\n";
-    mapnik::save_to_file(vw, tmp, "png256");
+    std::string format = map->map.get_extra_parameters().get<std::string>("format", "png256").get();
+    mapnik::save_to_file(vw, tmp, format);
     if (rename(tmp, filename)) {
         perror(tmp);
         return cmdNotDone;
