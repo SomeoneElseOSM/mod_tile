@@ -14,6 +14,8 @@ Together they efficiently render and serve raster map tiles for example
 to use within a slippy map. The two consist of the classic raster tile
 stack from `OpenStreetMap.org <https://openstreetmap.org>`__.
 
+This branch supports zoom levels up to 28.
+
 As an alternative to ``renderd`` its drop-in replacement
 `Tirex <https://github.com/openstreetmap/tirex>`__ can be used in
 combination with ``mod_tile``.
