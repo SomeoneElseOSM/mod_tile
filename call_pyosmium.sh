@@ -136,5 +136,5 @@ rm osm2pgsql.$$
 rm pyosmium.$$
 rm /var/cache/renderd/pyosmium/call_pyosmium.running
 #
-echo "Database Replication Lag:" `pyosmium_replag.sh -h`
+echo "Database Replication Lag:" `/usr/local/sbin/pyosmium_replag.sh -h`
 #
